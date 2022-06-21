@@ -1,4 +1,14 @@
-const list = null;
+const addBtn = document.getElementById("add-btn");
+const removeBtn = document.getElementById("remove-btn");
+const cloneBtn = document.getElementById("clone-btn");
+const displayBtn = document.getElementById("display-btn");
+
+addBtn.addEventListener("click", addItems);
+removeBtn.addEventListener("click", removeItems);
+cloneBtn.addEventListener("click", cloneItemList);
+displayBtn.addEventListener("click", displayItemList);
+
+var list = null;
 function addItems() {
     const item1 = document.createElement("li");
     const node1 = document.createTextNode("Macaroni");
@@ -24,22 +34,39 @@ function addItems() {
     element.appendChild(item5);
 }
 
-function removeItems(n) {
+function removeItems() {
+    let n = prompt("what number of items do you want to remove?", "0");
     for(let i = 0; i < n; i++) {
        var elmnt = document.getElementById("list").firstElementChild;
        elmnt.remove();
     }
 }
 
-function cloneItemList() {
-    list = document.getElementById("list");
-    console.log(list);
+function cloneItemList(id) {
+    let dumblist = document.getElementById(id);
+    //let listLi = dumblist.getElementsByTagName("li");
+    //listLength = listLi.length;
+    let node = dumblist.cloneNode(true);
+    /*
+    for (let i = 0; i < listLength; i++) {
+        let node = $('ol li:eq(' + i + ')').text();
+        let elmnt = node.cloneNode(true);
+        list.appendChild(elmnt);
+     }
+     */
+    //list = document.getElementById("list").innerHTML;
+    console.log(node);
+    return node;
 }
 
 function displayItemList() {
-    const newList = document.createElement("ol");
-    newList.appendChild(list);
+    /*const newList = document.createElement("ol");
+    const list1 = document.createTextNode(list);
+    newList.appendChild(list1);*/
     
+    let newList = cloneItemList("list");
+
     const element = document.getElementById("body");
     element.appendChild(newList);
 }
+
